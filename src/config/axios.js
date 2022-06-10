@@ -6,6 +6,6 @@ export function setToken(token) {
     axios.defaults.headers.Authentication = `Baerer ${token}`;
 }
 
-export function unsetToken(token) {
+export function unsetToken() {
     axios.defaults.headers.Authentication = '';
 }
