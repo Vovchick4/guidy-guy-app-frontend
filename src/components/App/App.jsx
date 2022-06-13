@@ -1,13 +1,13 @@
 import React, { Suspense } from "react";
 import { Routes, Route } from "react-router-dom";
 
-import { Layout } from "../";
+import { Layout, Loader } from "../";
 
 import routes from "../../config/routes";
 
 export default function App() {
   return (
-    <Suspense fallback={<span>Load</span>}>
+    <Suspense fallback={<Loader />}>
       <Routes>
         <Route element={<Layout />}>
           {routes.map(({ path, component: Component, ...rest }) => (
