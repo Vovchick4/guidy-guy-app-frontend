@@ -1,0 +1,1 @@
+export const defaultResponse = (res, meta, args) => res.data

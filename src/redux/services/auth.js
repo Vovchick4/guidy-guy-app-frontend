@@ -1,16 +1,12 @@
 import { createApi, fetchBaseQuery, retry } from '@reduxjs/toolkit/query/react'
 
+import { baseUrlApi } from '../../constants'
+import { setToken, defaultResponse } from './helpers'
+
 // Create our baseQuery instance
 const baseQuery = fetchBaseQuery({
-    baseUrl: 'http://localhost:4000/api/auth/',
-    prepareHeaders: (headers, { getState }) => {
-        // By default, if we have a token in the store, let's use that for authenticated requests
-        const token = getState().auth.token
-        if (token) {
-            headers.set('authentication', `Bearer ${token}`)
-        }
-        return headers
-    },
+    baseUrl: `${baseUrlApi}/auth/`,
+    prepareHeaders: setToken,
 })
 
 const baseQueryWithRetry = retry(baseQuery, { maxRetries: 6 })
@@ -26,6 +22,7 @@ export const authApi = createApi({
                 method: 'POST',
                 body: data
             }),
+            transformResponse: defaultResponse,
             extraOptions: {
                 backoff: () => {
                     // We intentionally error once on login, and this breaks out of retrying. The next login attempt will succeed.
