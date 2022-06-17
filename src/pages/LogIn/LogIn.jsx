@@ -1,43 +1,45 @@
-import { Formik, useFormik } from "formik"
-import * as Yup from "yup"
-import { useLoginMutation } from "../../redux/services/auth"
+import { useFormik } from "formik";
+import * as Yup from "yup";
 
-const validationSchema = Yup.object().shape({
-    email: Yup.string()
-        .trim()
-        .email('Invalid email')
-        .required('Required'),
-    password: Yup.string()
-        .min(6, 'Too short')
-        .max(50, 'Too long')
-        .required('Required')
-})
+import loginSchema from "../../shared/form/validations/login-shema";
+import { loginFormValues } from "../../shared/form/initial-values";
+import { Loader } from "../../components";
+import { useLoginMutation } from "../../redux/services/auth";
 
 export default function LogIn() {
-    const [login, result] = useLoginMutation()
+  const [login, { isLoading }] = useLoginMutation();
 
-    const Formik = useFormik({
-        initialValues: {
-            email: "",
-            password: ""
-        },
-        validationSchema,
-        onSubmit: (values) => {
-            login(values)
-            console.log(result?.status);
-        }
-    })
-    return (
-        <div>
-            <h1>LogIn</h1>
-            <form onSubmit={Formik.handleSubmit}>
-                <input type="email" name="email" onChange={Formik.handleChange} value={Formik.values.email} />
-                <p>{Formik.errors.email}</p>
-                <input type="password" name="password" onChange={Formik.handleChange} value={Formik.values.password} />
-                <p>{Formik.errors.password}</p>
+  const formik = useFormik({
+    initialValues: loginFormValues,
+    validationSchema: loginSchema,
+    onSubmit: (values) => {
+      login(values);
+    },
+  });
 
-                <button type="submit">Log In</button>
-            </form>
-        </div>
-    )
+  if (isLoading) return <Loader />;
+
+  return (
+    <div>
+      <h1>LogIn</h1>
+      <form onSubmit={formik.handleSubmit}>
+        <input
+          type="email"
+          name="email"
+          onChange={formik.handleChange}
+          value={formik.values.email}
+        />
+        <p>{formik.errors.email}</p>
+        <input
+          type="password"
+          name="password"
+          onChange={formik.handleChange}
+          value={formik.values.password}
+        />
+        <p>{formik.errors.password}</p>
+
+        <button type="submit">Log In</button>
+      </form>
+    </div>
+  );
 }

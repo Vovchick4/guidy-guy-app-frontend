@@ -10,7 +10,7 @@ const baseQuery = fetchBaseQuery({
 
 export const placesApi = createApi({
     reducerPath: 'placesApi',
-    baseQuery: baseQuery,
+    baseQuery,
     tagTypes: ['Places'],
     endpoints: (builder) => ({
         getPlaces:

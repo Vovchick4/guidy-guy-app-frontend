@@ -1,33 +1,54 @@
 import { createApi, fetchBaseQuery, retry } from '@reduxjs/toolkit/query/react'
 
 import { baseUrlApi } from '../../constants'
+import { setUser } from '../features/authSlice'
 import { setToken, defaultResponse } from './helpers'
 
 // Create our baseQuery instance
 const baseQuery = fetchBaseQuery({
     baseUrl: `${baseUrlApi}/auth/`,
-    prepareHeaders: setToken,
+    prepareHeaders(headers) {
+        return headers;
+    },
+    // prepareHeaders: setToken,
 })
-
-const baseQueryWithRetry = retry(baseQuery, { maxRetries: 6 })
 
 export const authApi = createApi({
     reducerPath: 'authApi',
-    baseQuery: baseQueryWithRetry,
+    baseQuery,
     tagTypes: ['Auth'],
     endpoints: (builder) => ({
         login: builder.mutation({
             query: (data) => ({
                 url: "log-in",
                 method: 'POST',
-                body: data
+                body: data,
+                credentials: 'include',
             }),
-            transformResponse: defaultResponse,
-            extraOptions: {
-                backoff: () => {
-                    // We intentionally error once on login, and this breaks out of retrying. The next login attempt will succeed.
-                    retry.fail({ fake: 'error' })
-                },
+            async onQueryStarted(args, { dispatch, queryFulfilled }) {
+                try {
+                    await queryFulfilled
+                    const res = await queryFulfilled;
+                    console.log(res);
+                    // await dispatch(authApi.endpoints.getUser.initiate(null));
+                } catch ({ error: { data: { message } } }) {
+                    alert(message);
+                }
+            }
+        }),
+        getUser: builder.query({
+            query: () => ({
+                url: 'get-user',
+                credentials: 'include',
+            }),
+            async onQueryStarted(args, { dispatch, queryFulfilled }) {
+                try {
+                    const res = await queryFulfilled;
+                    console.log(res);
+                    dispatch(setUser(res));
+                } catch ({ error: { data: { message } } }) {
+                    alert(message);
+                }
             },
         })
     }),

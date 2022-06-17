@@ -15,11 +15,11 @@ const routes = [
         component: lazy(() => import('../pages/SignUp')),
     },
     {
-        path: urls.LogIn,
+        path: urls.logIn,
         component: lazy(() => import('../pages/LogIn')),
     },
     {
-        path: urls.AdminRegistration,
+        path: urls.adminRegistration,
         component: lazy(() => import('../pages/AdminRegistration')),
     }
 ]

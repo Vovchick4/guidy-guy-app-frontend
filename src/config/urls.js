@@ -1,12 +1,9 @@
-import LogIn from "../pages/LogIn"
-
 const urls = {
-
     notFound: '*',
     home: '/',
-    signUp: "/signUp",
-    LogIn: "/LogIn",
-    AdminRegistration: "/AdminRegistration"
+    signUp: "/sign-up",
+    logIn: "/log-in",
+    adminRegistration: "/admin/sign-up"
 }
 
 export default urls
