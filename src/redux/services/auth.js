@@ -1,5 +1,6 @@
 import { createApi, fetchBaseQuery, retry } from '@reduxjs/toolkit/query/react'
 
+import { toast } from 'react-toastify'
 import { baseUrlApi } from '../../constants'
 import { setUser } from '../features/authSlice'
 
@@ -58,7 +59,8 @@ export const authApi = createApi({
                 try {
                     const { data } = await queryFulfilled
                     dispatch(setUser(data));
-                } catch (error) {
+                } catch ({ error: { data } }) {
+                    toast.error(data?.message)
                 }
             },
         })
