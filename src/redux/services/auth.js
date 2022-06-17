@@ -2,15 +2,10 @@ import { createApi, fetchBaseQuery, retry } from '@reduxjs/toolkit/query/react'
 
 import { baseUrlApi } from '../../constants'
 import { setUser } from '../features/authSlice'
-import { setToken, defaultResponse } from './helpers'
 
 // Create our baseQuery instance
 const baseQuery = fetchBaseQuery({
     baseUrl: `${baseUrlApi}/auth/`,
-    prepareHeaders(headers) {
-        return headers;
-    },
-    // prepareHeaders: setToken,
 })
 
 export const authApi = createApi({
@@ -18,6 +13,20 @@ export const authApi = createApi({
     baseQuery,
     tagTypes: ['Auth'],
     endpoints: (builder) => ({
+        register: builder.mutation({
+            query: (data) => ({
+                url: "sign-up",
+                method: 'POST',
+                body: data
+            }),
+            async onQueryStarted(args, { dispatch, queryFulfilled }) {
+                try {
+                    await queryFulfilled
+                    await dispatch(authApi.endpoints.getUser.initiate(null));
+                } catch (error) {
+                }
+            }
+        }),
         login: builder.mutation({
             query: (data) => ({
                 url: "log-in",
@@ -28,13 +37,17 @@ export const authApi = createApi({
             async onQueryStarted(args, { dispatch, queryFulfilled }) {
                 try {
                     await queryFulfilled
-                    const res = await queryFulfilled;
-                    console.log(res);
-                    // await dispatch(authApi.endpoints.getUser.initiate(null));
-                } catch ({ error: { data: { message } } }) {
-                    alert(message);
+                    await dispatch(authApi.endpoints.getUser.initiate(null));
+                } catch (error) {
                 }
             }
+        }),
+        logout: builder.mutation({
+            query: () => ({
+                url: 'log-out',
+                method: 'POST',
+                credentials: 'include',
+            }),
         }),
         getUser: builder.query({
             query: () => ({
@@ -43,11 +56,9 @@ export const authApi = createApi({
             }),
             async onQueryStarted(args, { dispatch, queryFulfilled }) {
                 try {
-                    const res = await queryFulfilled;
-                    console.log(res);
-                    dispatch(setUser(res));
-                } catch ({ error: { data: { message } } }) {
-                    alert(message);
+                    const { data } = await queryFulfilled
+                    dispatch(setUser(data));
+                } catch (error) {
                 }
             },
         })
@@ -55,7 +66,7 @@ export const authApi = createApi({
 })
 
 // Exports Hooks
-export const { useLoginMutation } = authApi
+export const { useLoginMutation, useRegisterMutation, useLogoutQuery, useGetUserQuery } = authApi
 
 // Exports Endpoints
 export const {

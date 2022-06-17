@@ -1,5 +1,6 @@
+import { toast } from "react-toastify";
+import { useEffect } from "react";
 import { useFormik } from "formik";
-import * as Yup from "yup";
 
 import loginSchema from "../../shared/form/validations/login-shema";
 import { loginFormValues } from "../../shared/form/initial-values";
@@ -7,7 +8,7 @@ import { Loader } from "../../components";
 import { useLoginMutation } from "../../redux/services/auth";
 
 export default function LogIn() {
-  const [login, { isLoading }] = useLoginMutation();
+  const [login, { isLoading, isSuccess, isError, error }] = useLoginMutation();
 
   const formik = useFormik({
     initialValues: loginFormValues,
@@ -16,6 +17,14 @@ export default function LogIn() {
       login(values);
     },
   });
+
+  useEffect(() => {
+    if (isSuccess) {
+      toast("User LOGIN successfully");
+    } else if (isError) {
+      toast.error(error.data.message);
+    }
+  }, [isLoading]);
 
   if (isLoading) return <Loader />;
 

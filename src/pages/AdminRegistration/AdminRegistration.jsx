@@ -1,5 +1,4 @@
 import { useFormik } from "formik";
-import * as Yup from "yup";
 
 import registerSchema from "../../shared/form/validations/register-schema";
 import { registrationFormValues } from "../../shared/form/initial-values";
@@ -19,11 +18,11 @@ export default function AdminRegistration() {
       <form onSubmit={formik.handleSubmit}>
         <input
           type="text"
-          name="name"
+          name="userName"
           onChange={formik.handleChange}
-          value={formik.values.name}
+          value={formik.values.userName}
         />
-        <p>{formik.errors.name}</p>
+        <p>{formik.errors.userName}</p>
         <input
           type="email"
           name="email"

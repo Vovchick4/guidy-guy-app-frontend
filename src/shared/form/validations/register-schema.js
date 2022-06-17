@@ -1,7 +1,7 @@
 import * as Yup from "yup"
 
 const registrationSchema = Yup.object().shape({
-    name: Yup.string()
+    userName: Yup.string()
         .trim()
         .min(2, 'Too Short!')
         .max(50, 'Too Long!')

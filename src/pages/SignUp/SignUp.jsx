@@ -1,18 +1,33 @@
+import { toast } from "react-toastify";
 import { useFormik } from "formik";
-import * as Yup from "yup";
+import { useEffect } from "react";
 
 import { Loader } from "../../components";
+import { useRegisterMutation } from "../../redux/services/auth";
 import { registrationFormValues } from "../../shared/form/initial-values";
 import registerSchema from "../../shared/form/validations/register-schema";
 
 export default function SignUp() {
+  const [register, { isLoading, isSuccess, isError, error }] =
+    useRegisterMutation();
+
   const formik = useFormik({
     initialValues: registrationFormValues,
     validationSchema: registerSchema,
     onSubmit: (values) => {
-      console.log(values);
+      register(values);
     },
   });
+
+  useEffect(() => {
+    if (isSuccess) {
+      toast("User LOGIN successfully");
+    } else if (isError) {
+      toast.error(error.data.message);
+    }
+  }, [isLoading]);
+
+  if (isLoading) return <Loader />;
 
   return (
     <div>
@@ -21,11 +36,11 @@ export default function SignUp() {
       <form onSubmit={formik.handleSubmit}>
         <input
           type="text"
-          name="name"
+          name="userName"
           onChange={formik.handleChange}
-          value={formik.values.name}
+          value={formik.values.userName}
         />
-        <p>{formik.errors.name}</p>
+        <p>{formik.errors.userName}</p>
         <input
           type="email"
           name="email"

@@ -4,7 +4,7 @@ export const loginFormValues = {
 }
 
 export const registrationFormValues = {
-    name: "",
+    userName: "",
     email: "",
     password: "",
     repeatPassword: ""
