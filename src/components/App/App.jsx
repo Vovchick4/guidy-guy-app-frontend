@@ -1,11 +1,21 @@
-import React, { Suspense } from "react";
+import React, { Suspense, useEffect } from "react";
+import { useDispatch } from "react-redux";
 import { Routes, Route } from "react-router-dom";
+import { withCookies } from "react-cookie";
+import { ToastContainer } from "react-toastify";
 
 import { Layout, Loader } from "../";
-
 import routes from "../../config/routes";
+import { authApi } from "../../redux/services/auth";
 
-export default function App() {
+function App() {
+  const dispatch = useDispatch();
+
+  // Get User
+  useEffect(() => {
+    dispatch(authApi.endpoints.getUser.initiate(null));
+  }, []);
+
   return (
     <Suspense fallback={<Loader />}>
       <Routes>
@@ -15,6 +25,20 @@ export default function App() {
           ))}
         </Route>
       </Routes>
+
+      <ToastContainer
+        position="top-center"
+        autoClose={5000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+      />
     </Suspense>
   );
 }
+
+export default withCookies(App);

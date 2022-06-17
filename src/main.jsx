@@ -5,9 +5,9 @@ import { Provider } from "react-redux";
 import { PersistGate } from "redux-persist/integration/react";
 
 import "./config/axios";
-
 import "normalize.css";
 import "./css/index.css";
+import "react-toastify/dist/ReactToastify.css";
 
 import { App } from "./components";
 import { store, persistor } from "./redux/store";
