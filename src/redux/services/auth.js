@@ -14,16 +14,25 @@ export const authApi = createApi({
     baseQuery,
     tagTypes: ['Auth'],
     endpoints: (builder) => ({
+        registerAdmin: builder.mutation({
+            query: (data) => ({
+                url: "sign-up-admin",
+                method: 'POST',
+                body: data,
+                credentials: 'include',
+            }),
+        }),
         register: builder.mutation({
             query: (data) => ({
                 url: "sign-up",
                 method: 'POST',
-                body: data
+                body: data,
+                credentials: 'include',
             }),
             async onQueryStarted(args, { dispatch, queryFulfilled }) {
                 try {
                     await queryFulfilled
-                    await dispatch(authApi.endpoints.getUser.initiate(null));
+                    dispatch(authApi.endpoints.getUser.initiate(null, { forceRefetch: true }));
                 } catch (error) {
                 }
             }
@@ -38,7 +47,7 @@ export const authApi = createApi({
             async onQueryStarted(args, { dispatch, queryFulfilled }) {
                 try {
                     await queryFulfilled
-                    await dispatch(authApi.endpoints.getUser.initiate(null));
+                    dispatch(authApi.endpoints.getUser.initiate(null, { forceRefetch: true }));
                 } catch (error) {
                 }
             }
@@ -68,7 +77,7 @@ export const authApi = createApi({
 })
 
 // Exports Hooks
-export const { useLoginMutation, useRegisterMutation, useLogoutQuery, useGetUserQuery } = authApi
+export const { useLoginMutation, useRegisterAdminMutation, useRegisterMutation, useLogoutQuery, useGetUserQuery } = authApi
 
 // Exports Endpoints
 export const {
