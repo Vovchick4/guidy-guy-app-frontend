@@ -14,9 +14,9 @@ import { authApi } from "./services/auth";
 import { placesApi } from "./services/places";
 
 const rootReducers = combineReducers({
+    authReducer,
     [authApi.reducerPath]: authApi.reducer,
     [placesApi.reducerPath]: placesApi.reducer,
-    authReducer,
 })
 
 export const store = configureStore({

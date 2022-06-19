@@ -2,10 +2,12 @@ import { toast } from "react-toastify";
 import { useEffect } from "react";
 import { useFormik } from "formik";
 
+import { Loader } from "../../shared/components";
+import { Input, Button } from "../../shared/ui";
+
 import loginSchema from "../../shared/form/validations/login-shema";
 import { loginFormValues } from "../../shared/form/initial-values";
-import { Loader } from "../../components";
-import { useLoginMutation } from "../../redux/services/auth";
+import { useLoginMutation } from "../../shared/redux/services/auth";
 
 export default function LogIn() {
   const [login, { isLoading, isSuccess, isError, error }] = useLoginMutation();
@@ -32,22 +34,23 @@ export default function LogIn() {
     <div>
       <h1>LogIn</h1>
       <form onSubmit={formik.handleSubmit}>
-        <input
+        <Input
           type="email"
           name="email"
           onChange={formik.handleChange}
           value={formik.values.email}
+          error={formik.errors.email}
         />
-        <p>{formik.errors.email}</p>
-        <input
+
+        <Input
           type="password"
           name="password"
           onChange={formik.handleChange}
           value={formik.values.password}
+          error={formik.errors.password}
         />
-        <p>{formik.errors.password}</p>
 
-        <button type="submit">Log In</button>
+        <Button type="submit">Log In</Button>
       </form>
     </div>
   );

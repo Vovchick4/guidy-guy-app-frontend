@@ -2,8 +2,10 @@ import { toast } from "react-toastify";
 import { useFormik } from "formik";
 import { useEffect } from "react";
 
-import { Loader } from "../../components";
-import { useRegisterMutation } from "../../redux/services/auth";
+import { Loader } from "../../shared/components";
+import { Input, Button } from "../../shared/ui";
+
+import { useRegisterMutation } from "../../shared/redux/services/auth";
 import { registrationFormValues } from "../../shared/form/initial-values";
 import registerSchema from "../../shared/form/validations/register-schema";
 
@@ -34,36 +36,39 @@ export default function SignUp() {
       <h1>Sign Up</h1>
 
       <form onSubmit={formik.handleSubmit}>
-        <input
+        <Input
           type="text"
           name="userName"
-          onChange={formik.handleChange}
           value={formik.values.userName}
+          onChange={formik.handleChange}
+          error={formik.errors.userName}
         />
-        <p>{formik.errors.userName}</p>
-        <input
+
+        <Input
           type="email"
           name="email"
           onChange={formik.handleChange}
           value={formik.values.email}
+          error={formik.errors.email}
         />
-        <p>{formik.errors.email}</p>
-        <input
+
+        <Input
           type="password"
           name="password"
           onChange={formik.handleChange}
           value={formik.values.password}
+          error={formik.errors.password}
         />
-        <p>{formik.errors.password}</p>
-        <input
+
+        <Input
           type="password"
           name="repeatPassword"
           onChange={formik.handleChange}
           value={formik.values.repeatPassword}
+          error={formik.errors.repeatPassword}
         />
-        <p>{formik.errors.repeatPassword}</p>
 
-        <button type="submit">Sign In</button>
+        <Button type="submit">Sign Up</Button>
       </form>
     </div>
   );

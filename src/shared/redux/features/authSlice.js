@@ -1,11 +1,9 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { persistReducer } from 'redux-persist'
 import storage from "redux-persist/lib/storage";
-import { authApi } from "../services/auth";
 
 const initialState = {
-    user: {},
-    token: null
+    user: {}
 }
 const authSlice = createSlice({
     name: 'auth',
@@ -22,6 +20,5 @@ export const { logout, setUser } = authSlice.actions
 export const getUserSelector = (state) => state.authReducer.user
 export const authReducer = persistReducer({
     key: 'rtk:auth',
-    storage,
-    whitelist: ['token']
+    storage
 }, authSlice.reducer);

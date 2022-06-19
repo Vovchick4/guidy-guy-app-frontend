@@ -4,13 +4,13 @@ import { BrowserRouter } from "react-router-dom";
 import { Provider } from "react-redux";
 import { PersistGate } from "redux-persist/integration/react";
 
-import "./config/axios";
+import "./shared/config/axios";
 import "normalize.css";
 import "./css/index.css";
 import "react-toastify/dist/ReactToastify.min.css";
 
-import { App } from "./components";
-import { store, persistor } from "./redux/store";
+import App from "./App";
+import { store, persistor } from "./shared/redux/store";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <BrowserRouter>

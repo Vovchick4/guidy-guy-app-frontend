@@ -1,18 +1,27 @@
 import React, { Suspense, useEffect } from "react";
-import { useDispatch } from "react-redux";
+import { isEmpty } from "lodash";
+import { useDispatch, useSelector } from "react-redux";
 import { Routes, Route } from "react-router-dom";
 import { withCookies } from "react-cookie";
 import { ToastContainer } from "react-toastify";
 
-import { Layout, Loader, PublicRoute, PrivateRoute } from "../";
-import routes from "../../config/routes";
-import { authApi } from "../../redux/services/auth";
+import {
+  Layout,
+  Loader,
+  PublicRoute,
+  PrivateRoute,
+} from "../shared/components";
+import routes from "../shared/config/routes";
+import { authApi } from "../shared/redux/services/auth";
+import { getUserSelector } from "../shared/redux/features/authSlice";
 
 function App() {
   const dispatch = useDispatch();
+  const user = useSelector(getUserSelector);
 
   // Get User
   useEffect(() => {
+    if (isEmpty(user)) return;
     dispatch(authApi.endpoints.getUser.initiate(null));
   }, []);
 

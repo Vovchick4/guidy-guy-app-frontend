@@ -1,5 +1,5 @@
-import { Loader } from "../../components";
-import { useGetPlacesQuery } from "../../redux/services/places";
+import { Loader } from "../../shared/components";
+import { useGetPlacesQuery } from "../../shared/redux/services/places";
 
 export default function Home() {
   const { data, isLoading } = useGetPlacesQuery({

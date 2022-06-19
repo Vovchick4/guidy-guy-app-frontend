@@ -1,13 +1,16 @@
+import { isEmpty } from "lodash";
 import { useEffect } from "react";
 import { useFormik } from "formik";
 import { useSelector } from "react-redux/es/exports";
 import { toast } from "react-toastify";
 
-import { Loader } from "../../components";
-import { useRegisterAdminMutation } from "../../redux/services/auth";
+import { Loader } from "../../shared/components";
+import { Input, Button } from "../../shared/ui";
+
+import { useRegisterAdminMutation } from "../../shared/redux/services/auth";
 import registerSchema from "../../shared/form/validations/register-schema";
 import { registrationFormValues } from "../../shared/form/initial-values";
-import { getUserSelector } from "../../redux/features/authSlice";
+import { getUserSelector } from "../../shared/redux/features/authSlice";
 
 export default function AdminRegistration() {
   const [registerAdmin, { isLoading, isSuccess, isError, error }] =
@@ -18,7 +21,7 @@ export default function AdminRegistration() {
     initialValues: registrationFormValues,
     validationSchema: registerSchema,
     onSubmit: (values) => {
-      if (!user && user?.role !== "admin") return;
+      if (isEmpty(user) || user?.role !== "admin") return;
 
       registerAdmin({ ...values, role: user?.role });
     },
@@ -38,36 +41,39 @@ export default function AdminRegistration() {
     <div>
       <h1>AdminRegistration</h1>
       <form onSubmit={formik.handleSubmit}>
-        <input
+        <Input
           type="text"
           name="userName"
-          onChange={formik.handleChange}
           value={formik.values.userName}
+          onChange={formik.handleChange}
+          error={formik.errors.userName}
         />
-        <p>{formik.errors.userName}</p>
-        <input
+
+        <Input
           type="email"
           name="email"
           onChange={formik.handleChange}
           value={formik.values.email}
+          error={formik.errors.email}
         />
-        <p>{formik.errors.email}</p>
-        <input
+
+        <Input
           type="password"
           name="password"
           onChange={formik.handleChange}
           value={formik.values.password}
+          error={formik.errors.password}
         />
-        <p>{formik.errors.password}</p>
-        <input
+
+        <Input
           type="password"
           name="repeatPassword"
           onChange={formik.handleChange}
           value={formik.values.repeatPassword}
+          error={formik.errors.repeatPassword}
         />
-        <p>{formik.errors.repeatPassword}</p>
 
-        <button type="submit">Sign In</button>
+        <Button type="submit">Create a new Admin</Button>
       </form>
     </div>
   );
