@@ -58,6 +58,14 @@ export const authApi = createApi({
                 method: 'POST',
                 credentials: 'include',
             }),
+            async onQueryStarted(args, { dispatch, queryFulfilled }) {
+                try {
+                    await queryFulfilled
+                    dispatch(logout())
+                    toast("Logout")
+                } catch (error) {
+                }
+            }
         }),
         getUser: builder.query({
             query: () => ({
