@@ -59,12 +59,15 @@ export const authApi = createApi({
                 credentials: 'include',
             }),
             async onQueryStarted(args, { dispatch, queryFulfilled }) {
-                try {
-                    await queryFulfilled
-                    dispatch(logout())
-                    toast("Logout")
-                } catch (error) {
-                }
+                queryFulfilled
+                    // Error with Parse JSON
+                    .then(res => {
+                        dispatch(logout())
+                        toast.success("UserLogOutAccount")
+                    })
+                    .catch(({ error: { data } }) => {
+                        toast.error(data?.message)
+                    })
             }
         }),
         getUser: builder.query({
@@ -86,7 +89,7 @@ export const authApi = createApi({
 })
 
 // Exports Hooks
-export const { useLoginMutation, useRegisterAdminMutation, useRegisterMutation, useLogoutQuery, useGetUserQuery } = authApi
+export const { useLoginMutation, useRegisterAdminMutation, useRegisterMutation, useLogoutMutation, useGetUserQuery } = authApi
 
 // Exports Endpoints
 export const {

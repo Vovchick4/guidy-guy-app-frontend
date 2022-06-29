@@ -1,24 +1,23 @@
 import React from "react";
+import { useSelector } from "react-redux";
 import { Navigate } from "react-router-dom";
 
 import urls from "../../config/urls";
-import { useGetUserQuery } from "../../redux/services/auth";
+import { getUserSelector } from "../../redux/features/authSlice";
 
 export default function PrivateRoute({ children, ...rest }) {
-  const { data, isLoading } = useGetUserQuery();
-
-  if (isLoading) return;
+  const user = useSelector(getUserSelector);
 
   if (rest.admin) {
     return (
       <React.Fragment>
-        {data && data.role === "admin" ? children : <Navigate to={urls.home} />}
+        {user && user.role === "admin" ? children : <Navigate to={urls.home} />}
       </React.Fragment>
     );
   } else {
     return (
       <React.Fragment>
-        {!data ? <Navigate to={urls.home} /> : children}
+        {!user ? <Navigate to={urls.home} /> : children}
       </React.Fragment>
     );
   }
