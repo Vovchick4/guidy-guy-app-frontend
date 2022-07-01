@@ -1,22 +1,17 @@
-import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
+import { createApi } from '@reduxjs/toolkit/query/react'
 
-import { baseUrlApi } from '../../constants'
 import { defaultResponse } from './helpers'
-
-// Create our baseQuery instance
-const baseQuery = fetchBaseQuery({
-    baseUrl: `${baseUrlApi}/places/`,
-})
+import customFetchBase from './helpers/customFetchBase'
 
 export const placesApi = createApi({
     reducerPath: 'placesApi',
-    baseQuery,
+    baseQuery: customFetchBase,
     tagTypes: ['Places'],
     endpoints: (builder) => ({
         getPlaces:
             builder.query({
                 query: (params) => {
-                    let url = `?`
+                    let url = `/places?`
                     Object.keys(params).forEach((key) => {
                         url += `${key}=${params[key]}&`
                     })
@@ -26,7 +21,7 @@ export const placesApi = createApi({
                 providesTags: ['Places']
             }),
         getPlacesById: builder.query({
-            query: (placeId) => `/${placeId}`,
+            query: (placeId) => `/places/${placeId}`,
             transformResponse: defaultResponse,
             providesTags: ['Place']
         })

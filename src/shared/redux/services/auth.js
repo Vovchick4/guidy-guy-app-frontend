@@ -1,22 +1,17 @@
-import { createApi, fetchBaseQuery, retry } from '@reduxjs/toolkit/query/react'
+import { createApi } from '@reduxjs/toolkit/query/react'
 
 import { toast } from 'react-toastify'
-import { baseUrlApi } from '../../constants'
 import { logout, setUser } from '../features/authSlice'
-
-// Create our baseQuery instance
-const baseQuery = fetchBaseQuery({
-    baseUrl: `${baseUrlApi}/auth/`,
-})
+import customFetchBase from './helpers/customFetchBase'
 
 export const authApi = createApi({
     reducerPath: 'authApi',
-    baseQuery,
+    baseQuery: customFetchBase,
     tagTypes: ['Auth'],
     endpoints: (builder) => ({
         registerAdmin: builder.mutation({
             query: (data) => ({
-                url: "sign-up-admin",
+                url: "/auth/sign-up-admin",
                 method: 'POST',
                 body: data,
                 credentials: 'include',
@@ -24,7 +19,7 @@ export const authApi = createApi({
         }),
         register: builder.mutation({
             query: (data) => ({
-                url: "sign-up",
+                url: "/auth/sign-up",
                 method: 'POST',
                 body: data,
                 credentials: 'include',
@@ -39,7 +34,7 @@ export const authApi = createApi({
         }),
         login: builder.mutation({
             query: (data) => ({
-                url: "log-in",
+                url: "/auth/log-in",
                 method: 'POST',
                 body: data,
                 credentials: 'include',
@@ -54,7 +49,7 @@ export const authApi = createApi({
         }),
         logout: builder.mutation({
             query: () => ({
-                url: 'log-out',
+                url: '/auth/log-out',
                 method: 'POST',
                 credentials: 'include',
             }),
@@ -72,7 +67,7 @@ export const authApi = createApi({
         }),
         getUser: builder.query({
             query: () => ({
-                url: 'get-user',
+                url: '/auth/get-user',
                 credentials: 'include',
             }),
             async onQueryStarted(args, { dispatch, queryFulfilled }) {
@@ -80,7 +75,7 @@ export const authApi = createApi({
                     const { data } = await queryFulfilled
                     dispatch(setUser(data))
                 } catch ({ error: { data } }) {
-                    dispatch(logout())
+                    // dispatch(logout())
                     toast.error(data?.message)
                 }
             },

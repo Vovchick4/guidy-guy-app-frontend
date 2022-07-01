@@ -4,7 +4,7 @@ import { useGetPlacesQuery } from "../../shared/redux/services/places";
 export default function Home() {
   const { data, isLoading } = useGetPlacesQuery({
     name: "",
-    take: 4,
+    take: 8,
     skip: 0,
   });
 
