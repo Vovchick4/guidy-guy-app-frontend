@@ -19,7 +19,6 @@ const customFetchBase = async (args, api, extraOptions) => {
 
             try {
                 const refreshToken = await baseQuery({ url: 'auth/refresh', credentials: 'include' }, api, extraOptions)
-                console.log(refreshToken);
                 if (refreshToken.data) {
                     result = await baseQuery(args, api, extraOptions);
                 } else {

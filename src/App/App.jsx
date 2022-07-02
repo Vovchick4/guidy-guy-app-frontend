@@ -21,7 +21,7 @@ function App() {
 
   // Get User
   useEffect(() => {
-    // if (isEmpty(user)) return;
+    if (isEmpty(user)) return;
     dispatch(authApi.endpoints.getUser.initiate(null));
   }, []);
 

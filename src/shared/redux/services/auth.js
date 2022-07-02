@@ -75,7 +75,7 @@ export const authApi = createApi({
                     const { data } = await queryFulfilled
                     dispatch(setUser(data))
                 } catch ({ error: { data } }) {
-                    // dispatch(logout())
+                    dispatch(logout())
                     toast.error(data?.message)
                 }
             },
