@@ -8,6 +8,32 @@ export const placesApi = createApi({
     baseQuery: customFetchBase,
     tagTypes: ['Places'],
     endpoints: (builder) => ({
+        createPlace: builder.mutation({
+            query: (data) => ({
+                url: `/places/`,
+                method: "POST",
+                body: data,
+                credentials: 'include'
+            }),
+            providesTags: ['CreatePlace']
+        }),
+        updatePlace: builder.mutation({
+            query: (placeId, data) => ({
+                url: `/places/${placeId}`,
+                method: "PATCH",
+                body: data,
+                credentials: 'include'
+            }),
+            providesTags: ['UpdatePlace']
+        }),
+        removePlace: builder.mutation({
+            query: (placeId) => ({
+                url: `/places/${placeId}`,
+                method: "DELETE",
+                credentials: 'include'
+            }),
+            providesTags: ['RemovePlace']
+        }),
         getPlaces:
             builder.query({
                 query: (params) => {
@@ -29,4 +55,8 @@ export const placesApi = createApi({
 })
 
 // Exports Hooks
-export const { useGetPlacesQuery } = placesApi
+export const {
+    useCreatePlaceMutation,
+    useUpdatePlaceMutation,
+    useRemovePlaceMutation,
+    useGetPlacesQuery } = placesApi

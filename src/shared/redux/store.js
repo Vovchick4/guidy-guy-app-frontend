@@ -10,13 +10,17 @@ import {
 } from 'redux-persist';
 
 import { authReducer } from "./features/authSlice";
+import { questReducer } from "./features/questSlice";
 import { authApi } from "./services/auth";
 import { placesApi } from "./services/places";
+import { questsApi } from "./services/quests";
 
 const rootReducers = combineReducers({
     authReducer,
+    questReducer,
     [authApi.reducerPath]: authApi.reducer,
     [placesApi.reducerPath]: placesApi.reducer,
+    [questsApi.reducerPath]: questsApi.reducer,
 })
 
 export const store = configureStore({
@@ -26,7 +30,7 @@ export const store = configureStore({
             serializableCheck: {
                 ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
             },
-        }).concat(authApi.middleware, placesApi.middleware),
+        }).concat(authApi.middleware, placesApi.middleware, questsApi.middleware),
 
 });
 

@@ -84,7 +84,12 @@ export const authApi = createApi({
 })
 
 // Exports Hooks
-export const { useLoginMutation, useRegisterAdminMutation, useRegisterMutation, useLogoutMutation, useGetUserQuery } = authApi
+export const {
+    useLoginMutation,
+    useRegisterAdminMutation,
+    useRegisterMutation,
+    useLogoutMutation,
+    useGetUserQuery } = authApi
 
 // Exports Endpoints
 export const {
