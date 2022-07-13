@@ -1,0 +1,59 @@
+.button {
+  color: var(--white-color);
+  font-size: 14px;
+  padding: 15px 18px;
+  background: none;
+  outline: none;
+  border: none;
+  transition: background 0.38s, color 0.38s, outline 0.38s, border 0.38s;
+}
+
+.text {
+  composes: button;
+  background: none !important;
+}
+
+.containe {
+  composes: button;
+  color: var(--white-color) !important;
+  background-color: initial;
+}
+
+.outline {
+  composes: button;
+  /* outline: 0.1em solid; */
+  border: 1px solid;
+  padding: 14px 18px;
+  color: initial;
+  background-color: transparent !important;
+}
+
+.string {
+  composes: button;
+}
+
+.success {
+  color: var(--succes-color);
+  border-color: var(--succes-color);
+  outline-color: var(--succes-color);
+  background-color: var(--succes-color);
+}
+
+.success:hover {
+  cursor: pointer;
+  color: var(--white-color) !important;
+  background-color: var(--succes-color) !important;
+}
+
+.danger {
+  color: var(--danger-color);
+  border-color: var(--danger-color);
+  outline-color: var(--danger-color);
+  background-color: var(--danger-color);
+}
+
+.danger:hover {
+  cursor: pointer;
+  color: var(--white-color) !important;
+  background-color: var(--danger-color) !important;
+}

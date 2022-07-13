@@ -5,6 +5,7 @@ import { Provider } from "react-redux";
 import { PersistGate } from "redux-persist/integration/react";
 
 import "./shared/config/axios";
+import "./css/variebles-colors.css"
 import "normalize.css";
 import "./css/index.css";
 import "react-toastify/dist/ReactToastify.min.css";

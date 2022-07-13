@@ -1,6 +1,23 @@
-export default function Button({ children, type = "button", ...rest }) {
+import { useMemo } from "react";
+import styles from "./Button.module.css";
+export default function Button({
+  children,
+  className = "",
+  type = "button",
+  variant = "text",
+  color = "primary",
+  ...rest
+}) {
+  const classes = useMemo(() => {
+    return [styles[variant], styles[color]];
+  }, []);
+
   return (
-    <button type={type} {...rest}>
+    <button
+      type={type}
+      className={`${classes.join(" ")} ${className}`}
+      {...rest}
+    >
       {children}
     </button>
   );
