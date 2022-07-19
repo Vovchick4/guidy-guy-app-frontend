@@ -6,6 +6,8 @@ export default function Button({
   type = "button",
   variant = "text",
   color = "primary",
+  rightAdorment = null,
+  leftAdorment = null,
   ...rest
 }) {
   const classes = useMemo(() => {
@@ -18,7 +20,9 @@ export default function Button({
       className={`${classes.join(" ")} ${className}`}
       {...rest}
     >
+      {leftAdorment && leftAdorment}
       {children}
+      {rightAdorment && rightAdorment}
     </button>
   );
 }

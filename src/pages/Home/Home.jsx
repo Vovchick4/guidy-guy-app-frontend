@@ -1,39 +1,42 @@
-import { Loader } from "../../shared/components";
-import { useGetPlacesQuery } from "../../shared/redux/services/places";
+import { Fragment } from "react";
 import { Button } from "../../shared/ui";
 
+import styles from "./Home.module.css";
+
+import headerImage from "../../shared/images/home_header_image.png";
+
 export default function Home() {
-  const { data, isLoading } = useGetPlacesQuery({
-    name: "",
-    take: 8,
-    skip: 0,
-  });
-
-  if (isLoading) return <Loader />;
-
   return (
-    <div>
-      <Button variant="text" color="success">
-        text success
-      </Button>
-      <Button variant="outline" color="success">
-        outline success
-      </Button>
-      <Button variant="containe" color="success">
-        containe success
-      </Button>
+    <Fragment>
+      <header className={styles.header}>
+        <div className={styles.header_content_image}>
+          <img
+            className={styles.header_image_content}
+            src={headerImage}
+            alt="HeaderImagePlaceHodoler"
+          />
+        </div>
 
-      <Button variant="text" color="danger">
-        text danger
-      </Button>
-      <Button variant="outline" color="danger">
-        outline danger
-      </Button>
-      <Button variant="containe" color="danger">
-        containe danger
-      </Button>
+        <div className={styles.header_content_text}>
+          <h1>Time to Travel</h1>
+          <p>
+            Et has minim elitr intellegat. Mea aeterno eleifend antiopam ad, nam
+            no suscipit quaerendum. At nam minimum ponderum. Est audiam animal
+            molestiae te.
+          </p>
 
-      {data && data.map((i) => <p key={i.id}>{i.name}</p>)}
-    </div>
+          <div className={styles.header_content_text_content_button}>
+            <Button variant="containe" color="danger">
+              Підібрати тур
+            </Button>
+            <Button variant="outline" color="danger">
+              Читати більше
+            </Button>
+          </div>
+        </div>
+      </header>
+
+      <section></section>
+    </Fragment>
   );
 }
