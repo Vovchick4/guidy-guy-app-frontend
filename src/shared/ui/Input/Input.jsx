@@ -9,6 +9,7 @@ export default function Input({
   error,
   color = "primary",
   variant = "default",
+  fullwidth = false,
   rightAdorment = null,
   leftAdorment = null,
   ...inputProps
@@ -19,6 +20,10 @@ export default function Input({
       styles[`input_${variant}`],
       styles[color],
     ];
+
+    if (fullwidth) {
+      inputStyles.push(styles.fullwidth);
+    }
 
     if (rightAdorment) {
       inputStyles.push(styles.rightAdorment);
@@ -33,7 +38,7 @@ export default function Input({
     }
 
     return inputStyles;
-  }, [rightAdorment, leftAdorment, variant, error]);
+  }, [rightAdorment, leftAdorment, variant, error, fullwidth]);
 
   return (
     <div className={styles.input_content}>

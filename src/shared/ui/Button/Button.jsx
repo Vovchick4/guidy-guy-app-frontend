@@ -6,13 +6,19 @@ export default function Button({
   type = "button",
   variant = "text",
   color = "primary",
+  fullwidth = false,
   rightAdorment = null,
   leftAdorment = null,
   ...rest
 }) {
   const classes = useMemo(() => {
-    return [styles[variant], styles[color]];
-  }, []);
+    const btnStyles = [styles[variant], styles[color]];
+    if (fullwidth) {
+      btnStyles.push(styles.fullwidth);
+    }
+
+    return btnStyles;
+  }, [color, variant, leftAdorment, rightAdorment, fullwidth]);
 
   return (
     <button

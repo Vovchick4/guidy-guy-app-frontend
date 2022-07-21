@@ -2,6 +2,8 @@ import { toast } from "react-toastify";
 import { useEffect } from "react";
 import { useFormik } from "formik";
 
+import styles from "./Login.module.css";
+
 import { Loader } from "../../shared/components";
 import { Input, Button } from "../../shared/ui";
 
@@ -31,14 +33,15 @@ export default function LogInPage() {
   if (isLoading) return <Loader />;
 
   return (
-    <div>
+    <div className={styles.content}>
       <h1>LogIn</h1>
-      <form onSubmit={formik.handleSubmit}>
+      <form className={styles.content_form} onSubmit={formik.handleSubmit}>
         <Input
           type="email"
           name="email"
           color="success"
           variant="outline"
+          fullwidth
           onChange={formik.handleChange}
           value={formik.values.email}
           error={formik.errors.email}
@@ -50,13 +53,18 @@ export default function LogInPage() {
           name="password"
           color="success"
           variant="outline"
+          fullwidth
           onChange={formik.handleChange}
           value={formik.values.password}
           error={formik.errors.password}
           placeholder={"password"}
         />
 
-        <Button type="submit">Log In</Button>
+        <div className={styles.content_button}>
+          <Button type="submit" fullwidth color="dark" variant="rounded">
+            Log In
+          </Button>
+        </div>
       </form>
     </div>
   );

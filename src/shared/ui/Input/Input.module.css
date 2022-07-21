@@ -4,7 +4,7 @@
 }
 
 .input {
-  color: var(--succes-color);
+  color: var(--text-color);
   background-color: transparent;
   border: none;
   outline: none;
@@ -44,6 +44,10 @@
 .input.inputError {
   border-bottom-color: var(--error-color);
   background-color: var(--error-color);
+}
+
+.fullwidth {
+  width: 100%;
 }
 
 .error_text {
