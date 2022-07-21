@@ -1,0 +1,63 @@
+.containerClassName {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.pageLinkClassName {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  color: var(--text-color);
+  background-color: var(--section-bg-color-light);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: color 340ms, background 430ms;
+}
+
+.pageLinkClassName:hover:not(.active) {
+  color: var(--white-color);
+  background-color: var(--danger-color);
+}
+
+.activeLinkClassName {
+  color: var(--white-color);
+  background-color: var(--danger-color);
+}
+
+.disabledLinkClassName {
+  background-color: var(--section-bg-color-light);
+}
+
+.arrowClassName {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+.nextLinkClassName {
+  composes: arrowClassName;
+  background-color: var(--section-bg-color-light) !important;
+}
+
+.previousLinkClassName {
+  composes: arrowClassName;
+  background-color: var(--section-bg-color-light) !important;
+}
+
+.previousLinkClassName:hover {
+  background-color: var(--danger-color);
+}
+
+.previousLinkClassName > a {
+  background-color: transparent;
+}

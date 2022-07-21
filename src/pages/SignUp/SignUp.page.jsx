@@ -1,35 +1,29 @@
-import { isEmpty } from "lodash";
-import { useEffect } from "react";
-import { useFormik } from "formik";
-import { useSelector } from "react-redux/es/exports";
 import { toast } from "react-toastify";
+import { useFormik } from "formik";
+import { useEffect } from "react";
 
 import { Loader } from "../../shared/components";
 import { Input, Button } from "../../shared/ui";
 
-import { useRegisterAdminMutation } from "../../shared/redux/services/auth";
-import registerSchema from "../../shared/form/validations/register-schema";
+import { useRegisterMutation } from "../../shared/redux/services/auth";
 import { registrationFormValues } from "../../shared/form/initial-values";
-import { getUserSelector } from "../../shared/redux/features/authSlice";
+import registerSchema from "../../shared/form/validations/register-schema";
 
-export default function AdminRegistration() {
-  const [registerAdmin, { isLoading, isSuccess, isError, error }] =
-    useRegisterAdminMutation();
-  const user = useSelector(getUserSelector);
+export default function SignUpPage() {
+  const [register, { isLoading, isSuccess, isError, error }] =
+    useRegisterMutation();
 
   const formik = useFormik({
     initialValues: registrationFormValues,
     validationSchema: registerSchema,
     onSubmit: (values) => {
-      if (isEmpty(user) || user?.role !== "admin") return;
-
-      registerAdmin({ ...values, role: user?.role });
+      register(values);
     },
   });
 
   useEffect(() => {
     if (isSuccess) {
-      toast("You Created New Admin!!!");
+      toast("User LOGIN successfully");
     } else if (isError) {
       toast.error(error.data.message);
     }
@@ -39,7 +33,8 @@ export default function AdminRegistration() {
 
   return (
     <div>
-      <h1>AdminRegistration</h1>
+      <h1>Sign Up</h1>
+
       <form onSubmit={formik.handleSubmit}>
         <Input
           type="text"
@@ -73,7 +68,7 @@ export default function AdminRegistration() {
           error={formik.errors.repeatPassword}
         />
 
-        <Button type="submit">Create a new Admin</Button>
+        <Button type="submit">Sign Up</Button>
       </form>
     </div>
   );

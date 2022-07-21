@@ -17,6 +17,34 @@ const routes = [
         admin: false
     },
     {
+        path: urls.quests + "/:userId",
+        component: lazy(() => import('../../pages/Quests')),
+        private: true,
+        restricted: false,
+        admin: false
+    },
+    {
+        path: urls.quest + "/:userId/:questId",
+        component: lazy(() => import('../../pages/Quest')),
+        private: true,
+        restricted: false,
+        admin: false
+    },
+    {
+        path: urls.places,
+        component: lazy(() => import('../../pages/Places')),
+        private: false,
+        restricted: false,
+        admin: false
+    },
+    {
+        path: urls.place + "/:placeId",
+        component: lazy(() => import('../../pages/Place')),
+        private: false,
+        restricted: false,
+        admin: false
+    },
+    {
         path: urls.signUp,
         component: lazy(() => import('../../pages/SignUp')),
         private: false,

@@ -9,7 +9,7 @@ import loginSchema from "../../shared/form/validations/login-shema";
 import { loginFormValues } from "../../shared/form/initial-values";
 import { useLoginMutation } from "../../shared/redux/services/auth";
 
-export default function LogIn() {
+export default function LogInPage() {
   const [login, { isLoading, isSuccess, isError, error }] = useLoginMutation();
 
   const formik = useFormik({
@@ -37,17 +37,23 @@ export default function LogIn() {
         <Input
           type="email"
           name="email"
+          color="success"
+          variant="outline"
           onChange={formik.handleChange}
           value={formik.values.email}
           error={formik.errors.email}
+          placeholder={"Username/email"}
         />
 
         <Input
           type="password"
           name="password"
+          color="success"
+          variant="outline"
           onChange={formik.handleChange}
           value={formik.values.password}
           error={formik.errors.password}
+          placeholder={"password"}
         />
 
         <Button type="submit">Log In</Button>

@@ -1,0 +1,51 @@
+.input_content {
+  position: relative;
+  width: 100%;
+}
+
+.input {
+  color: var(--succes-color);
+  background-color: transparent;
+  border: none;
+  outline: none;
+  padding: 12px 0;
+  transition: color 340ms, background 340ms, border 430ms;
+}
+
+.input::placeholder {
+  color: var(--succes-color);
+}
+
+.input_containe {
+  color: var(--white-color) !important;
+  background-color: initial;
+}
+
+.input_outline {
+  border-bottom: 1px solid var(--text-color);
+  background-color: transparent !important;
+}
+
+.input.primary {
+  border-color: var(--primary-color);
+  background-color: var(--primary-color);
+}
+
+.input.success {
+  border-color: var(--succes-color);
+  background-color: var(--succes-color);
+}
+
+.input.danger {
+  border-color: var(--danger-color);
+  background-color: var(--danger-color);
+}
+
+.input.inputError {
+  border-bottom-color: var(--error-color);
+  background-color: var(--error-color);
+}
+
+.error_text {
+  color: var(--danger-color);
+}

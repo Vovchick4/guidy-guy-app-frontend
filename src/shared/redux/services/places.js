@@ -43,7 +43,6 @@ export const placesApi = createApi({
                     })
                     return url
                 },
-                transformResponse: defaultResponse,
                 providesTags: ['Places']
             }),
         getPlacesById: builder.query({
@@ -59,4 +58,4 @@ export const {
     useCreatePlaceMutation,
     useUpdatePlaceMutation,
     useRemovePlaceMutation,
-    useGetPlacesQuery } = placesApi
+    useGetPlacesQuery, useGetPlacesByIdQuery } = placesApi

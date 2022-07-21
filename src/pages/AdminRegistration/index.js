@@ -1,1 +1,1 @@
-export { default } from "./AdminRegistration"
+export { default } from "./AdminRegistration.page"
