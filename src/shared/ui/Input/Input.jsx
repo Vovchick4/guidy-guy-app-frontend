@@ -1,5 +1,6 @@
 import { useMemo } from "react";
 import { CSSTransition } from "react-transition-group";
+import InputIcon from "./InputIcon";
 
 import styles from "./Input.module.css";
 import fadeIn from "../../../css/anim/fadeIn.module.css";
@@ -67,3 +68,5 @@ export default function Input({
     </div>
   );
 }
+
+Input.InputIcon = InputIcon;

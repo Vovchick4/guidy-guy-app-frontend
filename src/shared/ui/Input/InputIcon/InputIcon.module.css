@@ -1,0 +1,23 @@
+.content_input_file {
+  /* position: relative; */
+}
+
+.inp_icon::-webkit-file-upload-button {
+  display: none;
+}
+
+.icon {
+  width: 83px;
+  height: 83px;
+  background-color: var(--overlay-color);
+  padding: 20px;
+  border-radius: 50%;
+  font-size: 34px;
+  color: var(--white-color);
+  transition: background 383ms;
+}
+
+.icon:hover {
+  cursor: pointer;
+  background-color: var(--primary-color);
+}

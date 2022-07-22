@@ -44,7 +44,11 @@ export default function PlacesPage() {
 
   return (
     <Container>
-      <Modal open={modal === stateModals.addPlace} onClose={closeModal}>
+      <Modal
+        headerText="Create Place"
+        open={modal === stateModals.addPlace}
+        onClose={closeModal}
+      >
         <AddPlace />
       </Modal>
 

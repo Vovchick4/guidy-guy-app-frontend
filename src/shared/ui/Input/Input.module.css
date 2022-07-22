@@ -5,11 +5,18 @@
 
 .input {
   color: var(--white-color);
-  background-color: transparent;
+  background-color: var(--white-color);
   border: none;
   outline: none;
   padding: 12px 0;
   transition: color 340ms, border 430ms;
+}
+
+.input.default {
+  color: var(--text-color) !important;
+  border-color: var(--danger-color);
+  outline-color: var(--danger-color);
+  background-color: var(--white-color);
 }
 
 /*Change text in autofill textbox*/
@@ -47,8 +54,19 @@
 }
 
 .input_containe {
+  padding: 12px 15px;
   color: var(--white-color) !important;
   background-color: initial;
+}
+
+.input_rounded {
+  padding: 12px 15px !important;
+  border-radius: 20px;
+  border: 1px solid;
+}
+
+.input_containe:focus {
+  outline: 1px solid;
 }
 
 .input_outline {
