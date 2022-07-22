@@ -18,7 +18,7 @@
 }
 
 .input::placeholder {
-  color: var(--succes-color);
+  color: var(--white-color);
 }
 
 .input.leftAdornmentVisible {
@@ -65,8 +65,7 @@
   background-color: var(--succes-color);
 }
 
-.input.danger,
-.input::placeholder {
+.input.danger {
   color: var(--white-color);
   border-color: var(--danger-color);
   background-color: var(--danger-color);
