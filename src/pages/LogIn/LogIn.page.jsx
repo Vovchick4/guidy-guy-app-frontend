@@ -30,8 +30,6 @@ export default function LogInPage() {
     }
   }, [isLoading]);
 
-  if (isLoading) return <Loader />;
-
   return (
     <div className={authSharedStyles.content}>
       <h1>LogIn</h1>
@@ -40,6 +38,7 @@ export default function LogInPage() {
         onSubmit={formik.handleSubmit}
       >
         <Input
+          disabled={isLoading}
           type="email"
           name="email"
           color="success"
@@ -53,6 +52,7 @@ export default function LogInPage() {
         />
 
         <Input
+          disabled={isLoading}
           type="password"
           name="password"
           color="success"
@@ -66,7 +66,14 @@ export default function LogInPage() {
         />
 
         <div className={authSharedStyles.content_button}>
-          <Button type="submit" fullwidth color="dark" variant="rounded">
+          <Button
+            type="submit"
+            fullwidth
+            color="dark"
+            variant="rounded"
+            disabled={isLoading}
+            isLoading={isLoading}
+          >
             Log In
           </Button>
         </div>

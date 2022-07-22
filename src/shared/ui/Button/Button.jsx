@@ -1,8 +1,10 @@
-import { useMemo } from "react";
+import { Fragment, useMemo } from "react";
+import { Spinner } from "../";
 import styles from "./Button.module.css";
 export default function Button({
   children,
   className = "",
+  isLoading = false,
   type = "button",
   variant = "text",
   color = "primary",
@@ -26,9 +28,14 @@ export default function Button({
       className={`${classes.join(" ")} ${className}`}
       {...rest}
     >
-      {leftAdorment && leftAdorment}
-      {children}
-      {rightAdorment && rightAdorment}
+      {isLoading && <Spinner />}
+      {!isLoading && (
+        <Fragment>
+          {leftAdorment && leftAdorment}
+          {children}
+          {rightAdorment && rightAdorment}
+        </Fragment>
+      )}
     </button>
   );
 }

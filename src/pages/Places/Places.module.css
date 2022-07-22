@@ -1,19 +1,29 @@
 .article_content {
   display: flex;
   flex-direction: column;
-  justify-content: space-evenly;
-  min-height: calc(100vh - 105px);
+  padding-top: 40px;
 }
 
 .content_palces {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  gap: 8px;
+  gap: 25px;
 }
 
 .content_react_paginate_module {
   margin-top: 43px;
   padding: 0 100px;
+}
+
+.content {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 40px;
+}
+
+.content_title {
+  color: var(--white-color);
 }
 
 @media screen and (max-width: 1200px) {

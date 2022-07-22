@@ -4,7 +4,7 @@
 }
 
 .input {
-  color: var(--text-color);
+  color: var(--white-color);
   background-color: transparent;
   border: none;
   outline: none;
@@ -14,11 +14,12 @@
 
 /*Change text in autofill textbox*/
 .input:-webkit-autofill {
-  -webkit-box-shadow: 0 0 0 30px var(--auth-bg-color-light) inset !important;
+  -webkit-text-fill-color: var(--white-color);
+  -webkit-box-shadow: 0 0 0 30px var(--dark-color) inset !important;
 }
 
 .input::placeholder {
-  color: var(--white-color);
+  color: var(--placeholder-color);
 }
 
 .input.leftAdornmentVisible {

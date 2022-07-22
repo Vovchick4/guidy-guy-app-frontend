@@ -2,6 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
     page: 0,
+    total: 8,
     search: ""
 }
 const placeFilterSlice = createSlice({
