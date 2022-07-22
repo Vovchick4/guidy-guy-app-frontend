@@ -47,7 +47,6 @@ export const placesApi = createApi({
             }),
         getPlacesById: builder.query({
             query: (placeId) => `/places/${placeId}`,
-            transformResponse: defaultResponse,
             providesTags: ['Place']
         })
     })

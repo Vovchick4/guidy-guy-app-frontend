@@ -12,10 +12,12 @@ import {
 import { authReducer } from "./features/authSlice";
 import { questReducer } from "./features/questSlice";
 import { authApi } from "./services/auth";
+import { placeFilterReducer } from "./features/placeFilter";
 import { placesApi } from "./services/places";
 import { questsApi } from "./services/quests";
 
 const rootReducers = combineReducers({
+    placeFilterReducer,
     authReducer,
     questReducer,
     [authApi.reducerPath]: authApi.reducer,

@@ -5,6 +5,8 @@
   justify-content: flex-start;
   padding: 8px;
   min-height: 200px;
+  overflow: hidden;
+  cursor: pointer;
 }
 
 .content_card_wrapper_image {
@@ -17,8 +19,19 @@
   width: 100%;
   height: 100%;
   object-fit: cover;
+  transition: transform 340ms, filter 340ms;
+}
+
+.content_card:hover .content_card_image {
+  transform: scale(1.8);
+  filter: grayscale(80%);
 }
 
 .content_card_text {
   color: white;
+  transition: transform 300ms;
+}
+
+.content_card:hover .content_card_text {
+  transform: translateX(-150%);
 }

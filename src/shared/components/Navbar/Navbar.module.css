@@ -12,6 +12,10 @@
   background-color: var(--navbar-bg-color-light);
 }
 
+.logo {
+  width: 170px;
+}
+
 .logo > img {
   width: 94px;
   height: 74px;
@@ -42,4 +46,8 @@
 .active_link {
   composes: link;
   color: var(--danger-color);
+}
+
+.content_search {
+  max-width: 170px;
 }

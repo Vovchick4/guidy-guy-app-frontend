@@ -1,5 +1,8 @@
-import { NavLink } from "react-router-dom";
-import { Button } from "../../ui";
+import { useDispatch } from "react-redux";
+import { NavLink, useLocation, useNavigate } from "react-router-dom";
+import { Input } from "../../ui";
+
+import { setSearch, setPage } from "../../redux/features/placeFilter";
 
 import urls from "../../config/urls";
 
@@ -32,6 +35,19 @@ const links = [
 ];
 
 export default function Navbar() {
+  const dispatch = useDispatch();
+  const { pathname } = useLocation();
+  const navigate = useNavigate();
+
+  const onSearchChange = (e) => {
+    if (e.target.value && pathname !== urls.places) {
+      navigate(urls.places);
+    }
+
+    dispatch(setPage(0));
+    dispatch(setSearch(e.target.value));
+  };
+
   return (
     <div className={styles.navbar}>
       <div className={styles.logo}>
@@ -56,13 +72,14 @@ export default function Navbar() {
         </ul>
       </nav>
       <div className={styles.content_search}>
-        <Button
-          variant="containe"
+        <Input
+          fullwidth
           color="danger"
+          variant="containe"
+          placeholder="Шукати місця"
           leftAdorment={<img src={searchTour} alt="SearchTour" />}
-        >
-          Шукати тури
-        </Button>
+          onChange={onSearchChange}
+        />
       </div>
     </div>
   );

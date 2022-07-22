@@ -13,11 +13,16 @@
 
 .content_react_paginate_module {
   margin-top: 43px;
+  padding: 0 100px;
 }
 
 @media screen and (max-width: 1200px) {
   .content_palces {
     grid-template-columns: repeat(3, 1fr);
+  }
+
+  .content_react_paginate_module {
+    padding: 0;
   }
 }
 
@@ -27,7 +32,7 @@
   }
 }
 
-@media screen and (max-width: 430px) {
+@media screen and (max-width: 610px) {
   .content_palces {
     grid-template-columns: 1fr;
   }

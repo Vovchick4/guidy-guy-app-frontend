@@ -9,11 +9,40 @@
   border: none;
   outline: none;
   padding: 12px 0;
-  transition: color 340ms, background 340ms, border 430ms;
+  transition: color 340ms, border 430ms;
+}
+
+/*Change text in autofill textbox*/
+.input:-webkit-autofill {
+  -webkit-box-shadow: 0 0 0 30px var(--auth-bg-color-light) inset !important;
 }
 
 .input::placeholder {
   color: var(--succes-color);
+}
+
+.input.leftAdornmentVisible {
+  padding-right: 15px;
+  padding-left: 50px;
+}
+
+.input.rightAdornmentVisible {
+  padding-left: 15px;
+  padding-right: 50px;
+}
+
+.leftAdorment {
+  position: absolute;
+  top: 50%;
+  left: 14px;
+  transform: translateY(-50%);
+}
+
+.rightAdorment {
+  position: absolute;
+  top: 50%;
+  right: 14px;
+  transform: translateY(-50%);
 }
 
 .input_containe {
@@ -36,7 +65,9 @@
   background-color: var(--succes-color);
 }
 
-.input.danger {
+.input.danger,
+.input::placeholder {
+  color: var(--white-color);
   border-color: var(--danger-color);
   background-color: var(--danger-color);
 }

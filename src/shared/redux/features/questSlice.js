@@ -20,7 +20,7 @@ const questSlice = createSlice({
 })
 
 export const { clearState, setPlacesQuest, updatePlaceQuest } = questSlice.actions
-export const getPlacesQuest = (state) => state.questSlice.placesQuest
+export const getPlacesQuest = (state) => state.questReducer.placesQuest
 export const questReducer = persistReducer({
     key: 'rtk:quest',
     storage

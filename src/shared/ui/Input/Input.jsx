@@ -6,6 +6,7 @@ import fadeIn from "../../../css/anim/fadeIn.module.css";
 
 export default function Input({
   type = "text",
+  className = "",
   error,
   color = "primary",
   variant = "default",
@@ -26,11 +27,11 @@ export default function Input({
     }
 
     if (rightAdorment) {
-      inputStyles.push(styles.rightAdorment);
+      inputStyles.push(styles.rightAdornmentVisible);
     }
 
     if (leftAdorment) {
-      inputStyles.push(styles.leftAdorment);
+      inputStyles.push(styles.leftAdornmentVisible);
     }
 
     if (error) {
@@ -49,7 +50,11 @@ export default function Input({
         <div className={styles.leftAdorment}>{leftAdorment}</div>
       )}
 
-      <input className={classes.join(" ")} type={type} {...inputProps} />
+      <input
+        className={`${classes.join(" ")} ${className}`}
+        type={type}
+        {...inputProps}
+      />
 
       <CSSTransition
         in={!!error}
