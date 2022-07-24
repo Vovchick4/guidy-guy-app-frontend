@@ -3,7 +3,6 @@
   display: flex;
   align-items: flex-end;
   justify-content: flex-start;
-  padding: 8px;
   min-height: 200px;
   overflow: hidden;
   cursor: pointer;
@@ -13,6 +12,10 @@
   position: absolute;
   inset: 0;
   z-index: -1;
+}
+
+.content_card:hover .content_card_wrapper_image {
+  z-index: 0;
 }
 
 .content_card_image {
@@ -27,8 +30,32 @@
   filter: grayscale(80%);
 }
 
+.admin_content {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 8px;
+  column-gap: 15px;
+  position: absolute;
+  top: 0;
+  right: 0;
+  background-color: var(--overlay-color);
+}
+
+.icon {
+  color: var(--white-color);
+  transition: color 380ms;
+}
+
+.icon:hover {
+  color: var(--danger-color) !important;
+}
+
 .content_card_text {
+  width: 100%;
   color: white;
+  padding: 8px;
+  background-color: var(--overlay-color);
   transition: transform 300ms;
 }
 

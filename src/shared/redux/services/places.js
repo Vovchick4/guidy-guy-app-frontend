@@ -1,5 +1,7 @@
+import { toast } from 'react-toastify'
 import { createApi } from '@reduxjs/toolkit/query/react'
 
+import { getErrorResponseMessage } from '../../utils'
 import { defaultResponse } from './helpers'
 import customFetchBase from './helpers/customFetchBase'
 
@@ -15,16 +17,18 @@ export const placesApi = createApi({
                 body: data,
                 credentials: 'include'
             }),
-            providesTags: ['CreatePlace']
+            providesTags: ['Place', 'CreatePlace'],
+            invalidatesTags: ['Place']
         }),
         updatePlace: builder.mutation({
-            query: (placeId, data) => ({
-                url: `/places/${placeId}`,
-                method: "PATCH",
+            query: (data) => ({
+                url: `/places/${data.placeId}`,
+                method: "PUT",
                 body: data,
                 credentials: 'include'
             }),
-            providesTags: ['UpdatePlace']
+            providesTags: ['Place', 'UpdatePlace'],
+            invalidatesTags: ['Place']
         }),
         removePlace: builder.mutation({
             query: (placeId) => ({
@@ -32,7 +36,18 @@ export const placesApi = createApi({
                 method: "DELETE",
                 credentials: 'include'
             }),
-            providesTags: ['RemovePlace']
+            providesTags: ['RemovePlace'],
+            invalidatesTags: ['Place']
+        }),
+        uploadImagePlace: builder.mutation({
+            query: (data) => ({
+                url: `/places/photos`,
+                method: "POST",
+                body: data,
+                credentials: 'include'
+            }),
+            providesTags: ['UploadImagePlace'],
+            invalidatesTags: ['Place']
         }),
         getPlaces:
             builder.query({
@@ -43,17 +58,19 @@ export const placesApi = createApi({
                     })
                     return url
                 },
-                providesTags: ['Places']
+                providesTags: ['Place', 'Places']
             }),
         getPlacesById: builder.query({
             query: (placeId) => `/places/${placeId}`,
-            providesTags: ['Place']
+            providesTags: ['Place'],
+            invalidatesTags: ['Place']
         })
     })
 })
 
 // Exports Hooks
 export const {
+    useUploadImagePlaceMutation,
     useCreatePlaceMutation,
     useUpdatePlaceMutation,
     useRemovePlaceMutation,

@@ -9,3 +9,10 @@ export const registrationFormValues = {
     password: "",
     repeatPassword: ""
 }
+
+export const CrudPlaceFormValues = {
+    name: "",
+    lng: "",
+    lat: "",
+    like: false,
+}

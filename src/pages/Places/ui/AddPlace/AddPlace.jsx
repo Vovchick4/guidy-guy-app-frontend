@@ -1,102 +1,76 @@
-import * as Yup from "yup";
-import { useEffect, useState } from "react";
+import { toast } from "react-toastify";
+import { useState } from "react";
 import { useFormik } from "formik";
 
+import {
+  useCreatePlaceMutation,
+  useUploadImagePlaceMutation,
+} from "../../../../shared/redux/services/places";
+import { getErrorResponseMessage } from "../../../../shared/utils";
+
 import previewImages from "../../../../shared/images/authWallpers4k.jpg";
-
-import styles from "./AddPlace.module.css";
-import { Button, FormRow, Input } from "../../../../shared/ui";
-
-const validationSchema = Yup.object().shape({
-  name: Yup.string().required("Required"),
-  coordinates: Yup.object({}).required("Required"),
-});
-
-const fileReader = new FileReader();
+import { FormPlace } from "../";
+import validationSchema from "../../../../shared/form/validations/crud-place-schema";
+import { CrudPlaceFormValues } from "../../../../shared/form/initial-values";
 
 export default function AddPlace() {
+  const [uploadImagePlace] = useUploadImagePlaceMutation();
+  const [createPlace, { isLoading }] = useCreatePlaceMutation();
   const [previewImage, setPreviewImage] = useState(previewImages);
   const [file, setFile] = useState(null);
 
-  useEffect(() => {
-    if (file) {
-      fileReader.readAsDataURL(file);
-      fileReader.onload = (e) => {
-        setPreviewImage(e.target.result);
-      };
-    } else {
-      setPreviewImage(previewImages);
-    }
-  }, [file]);
-
   const formik = useFormik({
-    initialValues: { name: "", coordinates: {} },
+    initialValues: CrudPlaceFormValues,
     validationSchema,
-    onSubmit: (values) => {},
+    onSubmit: async (values) => {
+      const formData = new FormData();
+      const skipInitValuesKey = ["lng", "lat"];
+
+      if (file) {
+        formData.append("file", file);
+      }
+
+      Object.keys(values).forEach((key) => {
+        if (!skipInitValuesKey.includes(key)) {
+          formData.append(key, values[key]);
+        }
+      });
+
+      const resData = {
+        name: values.name,
+        coordinates: {
+          type: "Point",
+          coordinates: [Number(values.lng), Number(values.lat)],
+        },
+        like: false,
+      };
+
+      toast
+        .promise(createPlace(resData), {
+          pending: "Creating Place ...",
+          success: "Created Place",
+          error: (err) => `${getErrorResponseMessage(err)}`,
+        })
+        .then((res) => {
+          if (file) {
+            toast.promise(uploadImagePlace(formData), {
+              pending: "Uploading image to Place ...",
+              success: "Uploaded image to Place",
+              error: (err) => `${getErrorResponseMessage(err)}`,
+            });
+          }
+        });
+    },
   });
 
   return (
-    <div className={styles.content}>
-      <form className={styles.form} onSubmit={formik.handleSubmit}>
-        <FormRow>
-          <Input
-            autoComplete="Name"
-            type="text"
-            name="name"
-            color="default"
-            variant="rounded"
-            value={formik.values.name}
-            onChange={formik.handleChange}
-            onBlur={formik.handleBlur}
-            placeholder="Name"
-          />
-        </FormRow>
-
-        <FormRow>
-          <Input
-            autoComplete="Name"
-            type="text"
-            name="name"
-            color="default"
-            variant="rounded"
-            value={formik.values.name}
-            onChange={formik.handleChange}
-            onBlur={formik.handleBlur}
-            placeholder="Name"
-          />
-        </FormRow>
-
-        <FormRow>
-          <Input
-            autoComplete="Name"
-            type="text"
-            name="name"
-            color="default"
-            variant="rounded"
-            value={formik.values.name}
-            onChange={formik.handleChange}
-            onBlur={formik.handleBlur}
-            placeholder="Name"
-          />
-        </FormRow>
-
-        <Button type="submit" fullwidth color="dark" variant="rounded">
-          Create
-        </Button>
-      </form>
-      <div className={styles.select_image}>
-        <div className={styles.select_image_content}>
-          <img
-            className={styles.select_image_content_preview}
-            src={previewImage}
-            alt={previewImage}
-          />
-        </div>
-
-        <div className={styles.icon_click}>
-          <Input.InputIcon onChange={(e) => setFile(e.target.files[0])} />
-        </div>
-      </div>
-    </div>
+    <FormPlace
+      formik={formik}
+      file={file}
+      setFile={setFile}
+      previewImage={previewImage}
+      setPreviewImage={setPreviewImage}
+      isLoading={isLoading}
+    />
   );
 }
