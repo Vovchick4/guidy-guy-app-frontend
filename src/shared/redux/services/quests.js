@@ -15,13 +15,22 @@ export const questsApi = createApi({
             }),
         }),
         getAllQuests: builder.query({
-            query: () => `/quest/find-all`
+            query: () => ({
+                url: "/quest/find-all",
+                credentials: 'include',
+            }),
         }),
         getQuestById: builder.query({
-            query: (userId, questId) => `/quest/${userId}/${questId}`
+            query: (userId, questId) => ({
+                url: `/quest/${userId}/${questId}`,
+                credentials: 'include',
+            }),
         }),
         getAllQuestsByUserId: builder.query({
-            query: (userId) => `/quest/${userId}`
+            query: (userId) => ({
+                url: `/quest/${userId}`,
+                credentials: 'include',
+            }),
         }),
     })
 })

@@ -1,3 +1,4 @@
+import { isEmpty } from "lodash";
 import React from "react";
 import { useSelector } from "react-redux";
 import { Navigate } from "react-router-dom";
@@ -17,7 +18,7 @@ export default function PrivateRoute({ children, ...rest }) {
   } else {
     return (
       <React.Fragment>
-        {!user ? <Navigate to={urls.home} /> : children}
+        {isEmpty(user) ? <Navigate to={urls.home} /> : children}
       </React.Fragment>
     );
   }
