@@ -17,14 +17,14 @@ const routes = [
         admin: false
     },
     {
-        path: urls.quests + "/:userId",
+        path: urls.quests,
         component: lazy(() => import('../../pages/Quests')),
         private: true,
         restricted: false,
         admin: false
     },
     {
-        path: urls.quest + "/:userId/:questId",
+        path: urls.quest + "/:questId",
         component: lazy(() => import('../../pages/Quest')),
         private: true,
         restricted: false,
