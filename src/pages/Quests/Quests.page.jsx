@@ -3,6 +3,8 @@ import { useSelector } from "react-redux";
 
 import { Modal } from "../../shared/components";
 import { Button } from "../../shared/ui";
+import { AddQuestForm } from "./ui";
+
 import { getUserSelector } from "../../shared/redux/features/authSlice";
 import { useGetAllQuestsByUserIdQuery } from "../../shared/redux/services/quests";
 
@@ -28,7 +30,9 @@ export default function QuestsPage() {
         headerText="Create a new quest"
         open={stateModals.createQuest === modal}
         onClose={onCloseModals}
-      ></Modal>
+      >
+        <AddQuestForm />
+      </Modal>
 
       <Button
         variant="outline"
@@ -38,17 +42,8 @@ export default function QuestsPage() {
         Create QUEST
       </Button>
 
-      {!isLoading &&
-        !isFetching &&
-        data.length !== 0 &&
-        data.map((q) => <p key={q.id}>{q.name}</p>)}
-      <div>
-        {!isLoading && data.length === 0 && (
-          <h4>
-            <h3>You not have any QUEST</h3>
-          </h4>
-        )}
-      </div>
+      {!isLoading && data && data.map((q) => <p key={q.id}>{q.name}</p>)}
+      {!isLoading && !data && <p>You not have any QUEST</p>}
     </div>
   );
 }

@@ -5,7 +5,6 @@ import { Navbar } from "../";
 import { Button } from "../../ui";
 
 import { useLogoutMutation } from "../../redux/services/auth";
-
 export default function Layout() {
   const [logOut] = useLogoutMutation();
 
@@ -19,8 +18,11 @@ export default function Layout() {
 
       <div className={styles.layout_container}>
         <Outlet />
-        <Button onClick={userLogOut}>LogOut</Button>
       </div>
+
+      <Button onClick={userLogOut} color="danger" variant="outline">
+        LogOut
+      </Button>
     </div>
   );
 }

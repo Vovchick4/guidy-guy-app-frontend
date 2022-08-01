@@ -40,7 +40,7 @@ export default function Input({
     }
 
     return inputStyles;
-  }, [rightAdorment, leftAdorment, variant, error, fullwidth]);
+  }, [rightAdorment, leftAdorment, color, variant, error, fullwidth]);
 
   return (
     <div className={styles.input_content}>

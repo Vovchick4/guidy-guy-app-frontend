@@ -7,30 +7,38 @@ export const questsApi = createApi({
     tagTypes: ['Quests'],
     endpoints: (builder) => ({
         createQuest: builder.mutation({
-            query: (userId, data) => ({
+            query: ({ userId, ...data }) => ({
                 url: `/quest/create/${userId}`,
                 method: 'POST',
                 body: data,
                 credentials: 'include',
             }),
+            providesTags: ['Quest', 'CreateQuest'],
+            invalidatesTags: ['Quest']
         }),
         getAllQuests: builder.query({
             query: () => ({
                 url: "/quest/find-all",
                 credentials: 'include',
             }),
+            providesTags: ['getAllQuests'],
+            invalidatesTags: ['Quest']
         }),
         getQuestById: builder.query({
             query: (userId, questId) => ({
                 url: `/quest/${userId}/${questId}`,
                 credentials: 'include',
             }),
+            providesTags: ['getQuestById'],
+            invalidatesTags: ['Quest']
         }),
         getAllQuestsByUserId: builder.query({
             query: (userId) => ({
                 url: `/quest/${userId}`,
                 credentials: 'include',
             }),
+            providesTags: ['getAllQuestsByUserId'],
+            invalidatesTags: ['Quest']
         }),
     })
 })
