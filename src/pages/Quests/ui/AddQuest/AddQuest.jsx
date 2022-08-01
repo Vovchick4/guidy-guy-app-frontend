@@ -19,8 +19,8 @@ export default function AddQuest() {
   const formik = useFormik({
     initialValues: QuestsFormValues,
     validationSchema: questsSchema,
-    onSubmit: async (values) => {
-      await toast.promise(createQuestMutation({ userId: id, ...values }), {
+    onSubmit: (values) => {
+      toast.promise(createQuestMutation({ userId: id, ...values }), {
         pending: "Creating Quest ...",
         success: "Created Quest",
         error: (err) => `${getErrorResponseMessage(err)}`,
@@ -33,6 +33,7 @@ export default function AddQuest() {
       <form onSubmit={formik.handleSubmit}>
         <FormRow>
           <Input
+            disabled={isLoading}
             autoComplete="off"
             type="text"
             name="name"
@@ -47,6 +48,7 @@ export default function AddQuest() {
         </FormRow>
         <FormRow>
           <Input
+            disabled={isLoading}
             autoComplete="off"
             type="number"
             name="count"
@@ -59,7 +61,13 @@ export default function AddQuest() {
             error={formik.errors.count}
           />
         </FormRow>
-        <Button type="submit" variant="rounded" color="dark" fullwidth>
+        <Button
+          fullwidth
+          disabled={isLoading}
+          type="submit"
+          variant="rounded"
+          color="dark"
+        >
           Generate Quest
         </Button>
       </form>

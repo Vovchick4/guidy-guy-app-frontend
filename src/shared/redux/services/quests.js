@@ -21,7 +21,7 @@ export const questsApi = createApi({
                 url: "/quest/find-all",
                 credentials: 'include',
             }),
-            providesTags: ['getAllQuests'],
+            providesTags: ['Quest', 'getAllQuests'],
             invalidatesTags: ['Quest']
         }),
         getQuestById: builder.query({
@@ -29,7 +29,7 @@ export const questsApi = createApi({
                 url: `/quest/${userId}/${questId}`,
                 credentials: 'include',
             }),
-            providesTags: ['getQuestById'],
+            providesTags: ['Quest', 'getQuestById'],
             invalidatesTags: ['Quest']
         }),
         getAllQuestsByUserId: builder.query({
@@ -37,7 +37,7 @@ export const questsApi = createApi({
                 url: `/quest/${userId}`,
                 credentials: 'include',
             }),
-            providesTags: ['getAllQuestsByUserId'],
+            providesTags: ['Quest', 'getAllQuestsByUserId'],
             invalidatesTags: ['Quest']
         }),
     })

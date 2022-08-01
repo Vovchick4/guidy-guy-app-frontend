@@ -23,6 +23,12 @@
   overflow-y: auto;
 }
 
+@media screen and (max-width: 940px) {
+  .modal {
+    min-width: 100%;
+  }
+}
+
 .header_content {
   display: flex;
   align-items: center;
