@@ -23,7 +23,7 @@
 }
 
 .content_title {
-  color: var(--white-color);
+  color: var(--dark-color);
 }
 
 @media screen and (max-width: 1200px) {

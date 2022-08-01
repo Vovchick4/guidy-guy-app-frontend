@@ -1,8 +1,4 @@
-import { toast } from 'react-toastify'
 import { createApi } from '@reduxjs/toolkit/query/react'
-
-import { getErrorResponseMessage } from '../../utils'
-import { defaultResponse } from './helpers'
 import customFetchBase from './helpers/customFetchBase'
 
 export const placesApi = createApi({
@@ -36,7 +32,7 @@ export const placesApi = createApi({
                 method: "DELETE",
                 credentials: 'include'
             }),
-            providesTags: ['RemovePlace'],
+            providesTags: ['Place', 'RemovePlace'],
             invalidatesTags: ['Place']
         }),
         uploadImagePlace: builder.mutation({
@@ -46,7 +42,7 @@ export const placesApi = createApi({
                 body: data,
                 credentials: 'include'
             }),
-            providesTags: ['UploadImagePlace'],
+            providesTags: ['Place', 'UploadImagePlace'],
             invalidatesTags: ['Place']
         }),
         getPlaces:

@@ -1,13 +1,13 @@
 import { useState } from "react";
 import { useSelector } from "react-redux";
 
-import { Modal } from "../../shared/components";
+import { Container, Modal } from "../../shared/components";
 import { Button } from "../../shared/ui";
-import { AddQuestForm } from "./ui";
+import { AddQuestForm, QuestCard } from "./ui";
 
 import { getUserSelector } from "../../shared/redux/features/authSlice";
 import { useGetAllQuestsByUserIdQuery } from "../../shared/redux/services/quests";
-
+import styles from "./Quests.module.css";
 const stateModals = {
   createQuest: "CREATE_QUEST",
 };
@@ -25,7 +25,7 @@ export default function QuestsPage() {
   }
 
   return (
-    <div>
+    <Container>
       <Modal
         headerText="Create a new quest"
         open={stateModals.createQuest === modal}
@@ -42,8 +42,14 @@ export default function QuestsPage() {
         Create QUEST
       </Button>
 
-      {!isLoading && data && data.map((q) => <p key={q.id}>{q.name}</p>)}
+      {!isLoading && data && (
+        <div className={styles.grid_content}>
+          {data.map((q, i) => (
+            <QuestCard key={q.id} index={i} {...q} />
+          ))}
+        </div>
+      )}
       {!isLoading && !data && <p>You not have any QUEST</p>}
-    </div>
+    </Container>
   );
 }
