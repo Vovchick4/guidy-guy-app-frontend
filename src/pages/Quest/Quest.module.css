@@ -1,0 +1,35 @@
+.content {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 15px;
+}
+
+.title {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  color: white;
+  font-size: 28px;
+  font-weight: 700;
+}
+
+.breadcrumbs {
+  display: flex;
+  align-items: center;
+}
+
+.status_bar {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  color: white;
+  font-size: 18px;
+  font-weight: 700;
+}
+
+.card_content {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 8px;
+}

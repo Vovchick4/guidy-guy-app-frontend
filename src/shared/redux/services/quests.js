@@ -25,7 +25,7 @@ export const questsApi = createApi({
             invalidatesTags: ['Quest']
         }),
         getQuestById: builder.query({
-            query: (userId, questId) => ({
+            query: ({ userId, questId }) => ({
                 url: `/quest/${userId}/${questId}`,
                 credentials: 'include',
             }),
